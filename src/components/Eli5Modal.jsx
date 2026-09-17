@@ -1,5 +1,6 @@
 import React from "react";
 import { X, Lightbulb } from "lucide-react";
+import { formatMath } from "../utils/math";
 
 export default function Eli5Modal({ card, onClose }) {
   if (!card) return null;
@@ -11,7 +12,7 @@ export default function Eli5Modal({ card, onClose }) {
         <div className="drawer-header">
           <div className="drawer-header-title">
             <Lightbulb className="text-cyan" size={20} />
-            <h3>ELI5: {card.title}</h3>
+            <h3 dangerouslySetInnerHTML={{ __html: `ELI5: ${formatMath(card.title)}` }} />
           </div>
           <button className="drawer-close-btn" onClick={onClose}>
             <X size={20} />
@@ -21,9 +22,12 @@ export default function Eli5Modal({ card, onClose }) {
         <div className="drawer-body">
           <div className="eli5-card">
             <div className="eli5-tag">🧠 Intuitive Mental Model</div>
-            <p className="eli5-text">
-              {card.eli5 || "Think of this geological concept like a physical kitchen recipe where temperature and pressure transform raw ingredients into stratified layers!"}
-            </p>
+            <p 
+              className="eli5-text"
+              dangerouslySetInnerHTML={{ 
+                __html: formatMath(card.eli5 || "Think of this geological concept like a physical kitchen recipe where temperature and pressure transform raw ingredients into stratified layers!") 
+              }}
+            />
           </div>
 
           <div className="eli5-footer-tip">

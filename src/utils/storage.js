@@ -9,8 +9,18 @@ const KEYS = {
   LAST_CARD: "geoscroll_last_card_idx"
 };
 
+const DATA_VERSION = "v3_katex_clean";
+
 export function getInitialCards() {
   try {
+    const currentVersion = localStorage.getItem("geoscroll_data_version");
+    if (currentVersion !== DATA_VERSION) {
+      localStorage.removeItem(KEYS.CARDS);
+      localStorage.setItem("geoscroll_data_version", DATA_VERSION);
+      saveCardsToStorage(DEFAULT_SEED_CARDS);
+      return DEFAULT_SEED_CARDS;
+    }
+
     const saved = localStorage.getItem(KEYS.CARDS);
     if (saved) {
       const parsed = JSON.parse(saved);

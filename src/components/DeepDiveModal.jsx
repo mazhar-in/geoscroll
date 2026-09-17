@@ -1,6 +1,8 @@
 import React from "react";
 import { X, BookOpen, AlertCircle } from "lucide-react";
 
+import { formatMath } from "../utils/math";
+
 export default function DeepDiveModal({ card, onClose }) {
   if (!card) return null;
 
@@ -11,7 +13,7 @@ export default function DeepDiveModal({ card, onClose }) {
         <div className="drawer-header">
           <div className="drawer-header-title">
             <BookOpen className="text-amber" size={20} />
-            <h3>{card.title}</h3>
+            <h3 dangerouslySetInnerHTML={{ __html: formatMath(card.title) }} />
           </div>
           <button className="drawer-close-btn" onClick={onClose}>
             <X size={20} />
@@ -29,7 +31,7 @@ export default function DeepDiveModal({ card, onClose }) {
             {card.deepDive ? (
               <div 
                 className="rich-text-content" 
-                dangerouslySetInnerHTML={{ __html: card.deepDive }} 
+                dangerouslySetInnerHTML={{ __html: formatMath(card.deepDive) }} 
               />
             ) : (
               <p>Additional GATE/NET notes will be populated soon.</p>
@@ -42,7 +44,7 @@ export default function DeepDiveModal({ card, onClose }) {
                 <AlertCircle size={16} className="inline-icon" /> 
                 Exam Distractor Breakdown
               </h4>
-              <p>{card.quiz.rationale}</p>
+              <p dangerouslySetInnerHTML={{ __html: formatMath(card.quiz.rationale) }} />
             </div>
           )}
         </div>

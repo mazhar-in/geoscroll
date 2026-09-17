@@ -11,6 +11,7 @@ import {
   XCircle 
 } from "lucide-react";
 import { sound } from "../utils/audio";
+import { formatMath } from "../utils/math";
 
 export default function FeedCard({
   card,
@@ -72,24 +73,25 @@ export default function FeedCard({
         </div>
 
         {/* Card Headline */}
-        <h2 className="card-title">{card.title}</h2>
-        {card.subtitle && <p className="card-subtitle">{card.subtitle}</p>}
+        <h2 className="card-title" dangerouslySetInnerHTML={{ __html: formatMath(card.title) }} />
+        {card.subtitle && <p className="card-subtitle" dangerouslySetInnerHTML={{ __html: formatMath(card.subtitle) }} />}
 
         {/* Core Digestible Content Box */}
         <div className="card-core-box">
           {card.contentHtml && (
             <div 
               className="card-html-body" 
-              dangerouslySetInnerHTML={{ __html: card.contentHtml }} 
+              dangerouslySetInnerHTML={{ __html: formatMath(card.contentHtml) }} 
             />
           )}
 
           {/* Interactive MCQ Engine */}
           {isQuiz && (
             <div className="quiz-container">
-              <div className="quiz-question-title">
-                🎯 {q.question}
-              </div>
+              <div 
+                className="quiz-question-title"
+                dangerouslySetInnerHTML={{ __html: `🎯 ${formatMath(q.question)}` }}
+              />
               <div className="quiz-options-grid">
                 {q.options.map((opt, optIdx) => {
                   const letter = String.fromCharCode(65 + optIdx);
@@ -112,7 +114,10 @@ export default function FeedCard({
                       disabled={!!quizRecord}
                     >
                       <span className="opt-prefix">{letter}</span>
-                      <span className="opt-text">{opt}</span>
+                      <span 
+                        className="opt-text"
+                        dangerouslySetInnerHTML={{ __html: formatMath(opt) }}
+                      />
                       {quizRecord && optIdx === q.answer && (
                         <CheckCircle2 size={16} className="opt-icon-feedback text-emerald" />
                       )}
@@ -130,7 +135,7 @@ export default function FeedCard({
                   <div className="rationale-header">
                     <strong>Official Exam Rationale:</strong>
                   </div>
-                  <p>{q.rationale}</p>
+                  <p dangerouslySetInnerHTML={{ __html: formatMath(q.rationale) }} />
                 </div>
               )}
             </div>
