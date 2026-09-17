@@ -1,8 +1,10 @@
 import { ORIGIN_SOLAR_SYSTEM_CARDS } from "./originSolarSystemCards";
+import { INTERNAL_EARTH_CARDS } from "./internalEarthCards";
 
 export const DEFAULT_SEED_CARDS = [
   ...ORIGIN_SOLAR_SYSTEM_CARDS,
-  // --- UNIT 1: THE PLANET EARTH (3 Cards) ---
+  ...INTERNAL_EARTH_CARDS,
+  // --- UNIT 1: THE PLANET EARTH (Additional Subtopics) ---
   {
     id: 1,
     unitId: "unit_1",
@@ -47,55 +49,6 @@ export const DEFAULT_SEED_CARDS = [
       </ul>
     `,
     eli5: "Think of Rb as a factory making Sr over billions of years. If a rock was born with lots of inherited Sr right on day 1 (high intercept), its parents were old continental rocks, not the pristine deep mantle!"
-  },
-  {
-    id: 2,
-    unitId: "unit_1",
-    unitName: "The Planet Earth",
-    subtopicId: "earth_internal",
-    subtopicName: "Internal Structure & Discontinuities",
-    type: "cheat_sheet",
-    examTags: ["CSIR-NET", "UPSC Geology"],
-    title: "Discontinuities & Velocity Transitions",
-    subtitle: "Boundary checklist from Crust to the Inner Core",
-    contentHtml: `
-      <div class="svg-diagram-wrap">
-        <svg viewBox="0 0 320 110">
-          <rect x="10" y="10" width="300" height="15" fill="#38bdf8" rx="3"/>
-          <text x="160" y="22" fill="#000" font-size="9" font-weight="bold" text-anchor="middle">Crust (0-35km)</text>
-          <line x1="10" y1="28" x2="310" y2="28" stroke="#f43f5e" stroke-width="2" stroke-dasharray="4"/>
-          <text x="315" y="32" fill="#f43f5e" font-size="8" font-weight="bold">Moho</text>
-          
-          <rect x="10" y="34" width="300" height="28" fill="#10b981" rx="3"/>
-          <text x="160" y="52" fill="#000" font-size="10" font-weight="bold" text-anchor="middle">Mantle (to 2900km)</text>
-          <line x1="10" y1="64" x2="310" y2="64" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4"/>
-          <text x="315" y="68" fill="#f59e0b" font-size="8" font-weight="bold">Gutenberg</text>
-          
-          <rect x="10" y="70" width="300" height="25" fill="#f59e0b" rx="3"/>
-          <text x="160" y="86" fill="#000" font-size="9" font-weight="bold" text-anchor="middle">Outer Liquid Core (S-waves = 0)</text>
-        </svg>
-      </div>
-      <p><strong>Mnemonic for Boundaries (Surface to Core):</strong></p>
-      <div class="mnemonic-banner">
-        <div class="phrase">"Can Master Geologists Really Live?"</div>
-        <div class="mnemonic-ladder">
-          <div class="mnemonic-step"><span class="step-letter">C</span><strong>Conrad:</strong> Upper vs Lower Crust</div>
-          <div class="mnemonic-step"><span class="step-letter">M</span><strong>Mohorovičić:</strong> Crust vs Mantle (Vp jumps ~6.8 to ~8.1 km/s)</div>
-          <div class="mnemonic-step"><span class="step-letter">R</span><strong>Repetti:</strong> Upper vs Lower Mantle (~660 km)</div>
-          <div class="mnemonic-step"><span class="step-letter">G</span><strong>Gutenberg:</strong> Mantle vs Outer Core (2900 km, S-wave shadow)</div>
-          <div class="mnemonic-step"><span class="step-letter">L</span><strong>Lehmann:</strong> Liquid Outer Core vs Solid Inner Core (~5150 km)</div>
-        </div>
-      </div>
-    `,
-    deepDive: `
-      <h4>Crucial Wave Physics for Exams:</h4>
-      <ul>
-        <li><strong>S-Wave Shadow Zone:</strong> Spans 103° to 180° because S-waves cannot propagate through the liquid outer core (rigidity modulus μ = 0).</li>
-        <li><strong>P-Wave Shadow Zone:</strong> Spans 103° to 142° due to refraction at the core-mantle boundary (Gutenberg discontinuity).</li>
-        <li><strong>PREM Model:</strong> Preliminary Reference Earth Model shows density jump from ~5.5 g/cm³ in the deep mantle to ~9.9 g/cm³ in the outer core!</li>
-      </ul>
-    `,
-    eli5: "Earth is like a hard-boiled egg with an avocado inside. The crack between the white and yellow is the Gutenberg line, where seismic shear waves stop because the yellow part is totally melted!"
   },
   {
     id: 3,

@@ -14,13 +14,14 @@ export function getInitialCards() {
     const saved = localStorage.getItem(KEYS.CARDS);
     if (saved) {
       const parsed = JSON.parse(saved);
-      if (Array.isArray(parsed) && parsed.length >= DEFAULT_SEED_CARDS.length) {
+      if (Array.isArray(parsed) && parsed.length >= DEFAULT_SEED_CARDS.length && parsed.some((c) => c.id === 201)) {
         return parsed;
       }
     }
   } catch (e) {
     console.error("Failed to load cards from localStorage", e);
   }
+  saveCardsToStorage(DEFAULT_SEED_CARDS);
   return DEFAULT_SEED_CARDS;
 }
 
