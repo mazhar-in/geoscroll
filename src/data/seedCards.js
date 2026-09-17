@@ -1,55 +1,12 @@
 import { ORIGIN_SOLAR_SYSTEM_CARDS } from "./originSolarSystemCards";
 import { INTERNAL_EARTH_CARDS } from "./internalEarthCards";
+import { RADIOMETRIC_DATING_CARDS } from "./radiometricDatingCards";
 
 export const DEFAULT_SEED_CARDS = [
   ...ORIGIN_SOLAR_SYSTEM_CARDS,
   ...INTERNAL_EARTH_CARDS,
-  // --- UNIT 1: THE PLANET EARTH (Additional Subtopics) ---
-  {
-    id: 1,
-    unitId: "unit_1",
-    unitName: "The Planet Earth",
-    subtopicId: "earth_radiometric",
-    subtopicName: "Radiometric Dating (Rb-Sr, Sm-Nd, 14C)",
-    type: "quiz",
-    examTags: ["GATE", "CSIR-NET"],
-    title: "Rb-Sr Isochron: Slope & Intercept Decoded",
-    subtitle: "How to instantly extract rock age and source magma genesis",
-    contentHtml: `
-      <p>The Rubidium-Strontium whole-rock isochron equation is:</p>
-      <div style="background:rgba(0,0,0,0.4); padding:8px 12px; border-radius:6px; font-family:monospace; margin:8px 0; color:#38bdf8;">
-        (⁸⁷Sr/⁸⁶Sr)<sub>present</sub> = (⁸⁷Sr/⁸⁶Sr)<sub>0</sub> + (⁸⁷Rb/⁸⁶Sr) × (e<sup>λt</sup> - 1)
-      </div>
-      <p>When plotted as y = c + mx:</p>
-      <ul style="margin-left:1.1rem; margin-top:4px;">
-        <li><strong>Slope (m)</strong> = <code>e<sup>λt</sup> - 1 ≈ λt</code> → Yields <strong>Rock Age (t)</strong>.</li>
-        <li><strong>Y-intercept (c)</strong> = Initial ratio <code>(⁸⁷Sr/⁸⁶Sr)<sub>0</sub></code> → Identifies Mantle vs. Crustal contamination.</li>
-      </ul>
-    `,
-    quiz: {
-      question: "In a Rb-Sr isochron plot, if an igneous granite exhibits an unusually high initial (⁸⁷Sr/⁸⁶Sr) ratio (> 0.710), what does this primarily indicate?",
-      options: [
-        "Rapid crystallization from a depleted primitive mantle source",
-        "Assimilation or melting of ancient continental crustal rocks",
-        "Loss of daughter isotope ⁸⁷Sr during high-temperature metamorphism",
-        "An extremely short radioactive half-life of ⁸⁷Rb"
-      ],
-      answer: 1,
-      rationale: "Initial ⁸⁷Sr/⁸⁶Sr ratios for depleted mantle are low (0.702 - 0.704), whereas ancient sialic continental crust has high Rb/Sr and yields high ratios (> 0.710). A high intercept proves crustal contamination or S-type granite anatexis."
-    },
-    deepDive: `
-      <h4>Core Isochron Rules for GATE & NET:</h4>
-      <ul>
-        <li><strong>Decay Constant:</strong> For ⁸⁷Rb, λ = 1.42 × 10⁻¹¹ yr⁻¹. Half-life t₁/₂ ≈ 48.8 Ga.</li>
-        <li><strong>Fictitious Isochrons:</strong> In open systems (metamorphic heating), mineral isochrons reset while whole-rock isochrons preserve the original igneous crystallization age!</li>
-        <li><strong>Mantle vs Crust Reservoirs:</strong>
-          <br>• Mantle: low Rb/Sr, low ⁸⁷Sr/⁸⁶Sr.
-          <br>• Crust: high Rb/Sr, elevated ⁸⁷Sr/⁸⁶Sr.
-        </li>
-      </ul>
-    `,
-    eli5: "Think of Rb as a factory making Sr over billions of years. If a rock was born with lots of inherited Sr right on day 1 (high intercept), its parents were old continental rocks, not the pristine deep mantle!"
-  },
+  ...RADIOMETRIC_DATING_CARDS,
+  // --- UNIT 1: THE PLANET EARTH (Remaining Subtopics) ---
   {
     id: 3,
     unitId: "unit_1",

@@ -14,7 +14,7 @@ export function getInitialCards() {
     const saved = localStorage.getItem(KEYS.CARDS);
     if (saved) {
       const parsed = JSON.parse(saved);
-      if (Array.isArray(parsed) && parsed.length >= DEFAULT_SEED_CARDS.length && parsed.some((c) => c.id === 201)) {
+      if (Array.isArray(parsed) && parsed.length >= DEFAULT_SEED_CARDS.length && parsed.some((c) => c.id === 301)) {
         return parsed;
       }
     }
