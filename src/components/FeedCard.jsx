@@ -49,7 +49,7 @@ export default function FeedCard({
   };
 
   return (
-    <article className="feed-card" ref={cardRef} data-index={index}>
+    <article className="feed-card" id={`card-${card.id}`} ref={cardRef} data-index={index}>
       {/* Subject Radial Ambient Glow */}
       <div className="card-glow" />
       <div className="card-grid-pattern" />

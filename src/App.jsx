@@ -21,9 +21,19 @@ export default function App() {
   // State
   const [cards, setCards] = useState(() => getInitialCards());
   const [bookmarks, setBookmarks] = useState(() => getBookmarks());
-  const [quizRecords, setQuizRecords] = useState(() => getQuizRecords());
+  // Quizzes are kept in-memory only so MCQs are fresh and unchecked upon every page reload
+  const [quizRecords, setQuizRecords] = useState({});
   const [streak, setStreak] = useState(() => computeDailyStreak());
   const [soundEnabled, setSoundEnabled] = useState(() => sound.enabled);
+
+  // Clear any previously saved quiz answers from storage on mount
+  useEffect(() => {
+    try {
+      localStorage.removeItem("geoscroll_quizzes");
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
 
   // Filters
   const [currentFilter, setCurrentFilter] = useState("all");
@@ -145,12 +155,33 @@ export default function App() {
   };
 
   const handleAnswerQuiz = (cardId, optionIndex, isCorrect) => {
-    const updated = saveQuizRecord(cardId, optionIndex, isCorrect);
-    setQuizRecords({ ...updated });
+    // In-memory update only: resetting or reloading will restore unchecked state
+    setQuizRecords((prev) => ({
+      ...prev,
+      [cardId]: { selected: optionIndex, correct: isCorrect }
+    }));
     if (isCorrect) {
       triggerToast("🎯 Spot on! High-yield concept mastered.");
     } else {
       triggerToast("❌ Incorrect. Read the distractor breakdown!");
+    }
+  };
+
+  const handleJumpToCard = (cardId) => {
+    // Check if card is in current filtered list
+    const currentIdx = filteredCards.findIndex((c) => c.id === cardId);
+    if (currentIdx !== -1) {
+      navigateToCard(currentIdx);
+    } else {
+      // Switch filter to 'all' so it's present, then scroll to it
+      setCurrentFilter("all");
+      setSelectedSubtopic(null);
+      setTimeout(() => {
+        const fullIdx = cards.findIndex((c) => c.id === cardId);
+        if (fullIdx !== -1) {
+          navigateToCard(fullIdx);
+        }
+      }, 120);
     }
   };
 
@@ -281,6 +312,13 @@ export default function App() {
         isOpen={isSyllabusOpen}
         onClose={() => setIsSyllabusOpen(false)}
         allCards={cards}
+        bookmarks={bookmarks}
+        onToggleBookmark={handleToggleBookmark}
+        onJumpToCard={handleJumpToCard}
+        onViewSavedFeed={() => {
+          setIsSyllabusOpen(false);
+          handleFilterSelect("bookmarked");
+        }}
         selectedSubtopicId={selectedSubtopic?.id}
         onSelectSubtopic={handleSubtopicSelect}
       />
